@@ -70,6 +70,15 @@ void heap_free(heap_t* heap, void* address)
 	tlsf_free(heap->tlsf, address);
 }
 
+static void my_walker(void* ptr, size_t size, int used, void* user)
+{
+	(void)user;
+	if (used) {
+		printf("Memory leak of size %d with call stack:\n", (unsigned int) size);
+	}
+	// printf("\t%p %s size: %d\n", ptr, used ? "used" : "free", (unsigned int)size);
+}
+
 void heap_destroy(heap_t* heap)
 {
 	tlsf_destroy(heap->tlsf);
@@ -77,6 +86,14 @@ void heap_destroy(heap_t* heap)
 	arena_t* arena = heap->arena;
 	while (arena)
 	{
+		// START OF STUDENT CODE
+
+		// make our own version of default_walker
+		// use it in tlsf_walk_pool
+		tlsf_walk_pool(arena->pool, my_walker, NULL);
+
+		// END OF STUDENT CODE
+
 		arena_t* next = arena->next;
 		VirtualFree(arena, 0, MEM_RELEASE);
 		arena = next;
