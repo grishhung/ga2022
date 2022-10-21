@@ -53,7 +53,7 @@ trace_t* trace_create(heap_t* heap, int event_capacity)
 
 	trace->mutex = mutex_create();
 
-	trace->event_lookback = 1;  // This will be disastrous if the trace has zero elements and a pop is attempted.
+	trace->event_lookback = 0;  // This will be disastrous if the trace has zero elements and a pop is attempted.
 
 	return trace;
 
