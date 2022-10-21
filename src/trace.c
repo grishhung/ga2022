@@ -30,8 +30,9 @@ typedef struct trace_t {  // STUDENT ADDED
 	int event_capacity;          // maxinum number of allowed events (100 in the homework test)
 
 	int is_capturing;            // boolean value for whether tracing has begun or not
-	trace_event_t* event_stack;  // Oops, not actually a stack; really just a list of events to put in the body
+	trace_event_t* event_stack;  // list of events in chronological order (so not actually a stack, oops)
 	int event_count;
+	int event_lookback;          // for telling what name to use when popping
 	mutex_t* mutex;
 	char path[MAX_PATH_LEN];
 } trace_t;
@@ -52,11 +53,11 @@ trace_t* trace_create(heap_t* heap, int event_capacity)
 
 	trace->mutex = mutex_create();
 
+	trace->event_lookback = 1;  // This will be disastrous if the trace has zero elements and a pop is attempted.
+
 	return trace;
 
 	// END OF STUDENT CODE
-
-	// return NULL;  // student commented out placeholder return value
 }
 
 void trace_destroy(trace_t* trace)
@@ -68,7 +69,11 @@ void populate_trace_event(trace_t* trace, const char* name, char ph)  // STUDENT
 {
 	if (trace->is_capturing)
 	{
-		// I should probably do something here if the event_capacity is exceeded...
+		// Do not populate if event_capacity is exceeded.
+
+		if (trace->event_count >= trace->event_capacity) {
+			return;
+		}
 
 		mutex_lock(trace->mutex);
 
@@ -95,12 +100,28 @@ void trace_duration_push(trace_t* trace, const char* name)
 
 void trace_duration_pop(trace_t* trace)
 {
-	// No name argument is provided, but it turns out that Chrome has all the info it needs to properly display
-	// the graph, even without the name, so it's fine. (Quick solution would be to add the event at the top of the
-	// stack and then pop the element, but currently my "stack" is really just a list of 'B' and 'E' events in
-	// chronological order.)
+	// START OF STUDENT CODE
 
-	populate_trace_event(trace, "", 'E');  // STUDENT ADDED
+	// NOTE: The following implementation was a total failure because my stack isn't really a stack. It's one big
+	//       list of 'B' / 'E' events all in chronological order. My idea was basically to use an int index called
+	//       "event_lookback" and "look back" and find whatever name I'd need to give this event. The only problem
+	//       is that all the events for all the different threads are all in this same list, so I don't have a good
+	//       way of figuring out what that name is actually supposed to be. The following always resulted in the
+	//       wrong 'E' event name and in totally random order every time I ran it.
+
+	// trace->event_lookback++;
+	// int curr_index = trace->event_count;
+	// char* name = trace->event_stack[index].name;
+	// populate_trace_event(trace, name, 'E');
+
+	//       However, thankfully, it turns out that Chrome has all the info it needs to properly display the graph
+	//       even without the 'E' event names, name, so I can just add a totally blank name and the JSON still
+	//       displays properly. (The better solution would be to either implement a proper stack and actually pop
+	//       the element OR to give each thread its own list and use the lookback integer method.)
+
+	populate_trace_event(trace, "", 'E');
+
+	// END OF STUDENT CODE
 }
 
 void trace_capture_start(trace_t* trace, const char* path)
