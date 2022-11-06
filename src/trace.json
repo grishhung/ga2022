@@ -1,12 +1,12 @@
 {
 	"displayTimeUnit": "ns", "traceEvents": [
-		{"name":"homework3_slow_function","ph":"B","pid":0,"tid":"6908","ts":"1194793"},
-		{"name":"homework3_slow_function","ph":"B","pid":0,"tid":"19580","ts":"1203530"},
-		{"name":"homework3_slower_function","ph":"B","pid":0,"tid":"19580","ts":"2297197"},
-		{"name":"homework3_slower_function","ph":"B","pid":0,"tid":"6908","ts":"2297368"},
-		{"name":"","ph":"E","pid":0,"tid":"6908","ts":"4394943"},
-		{"name":"","ph":"E","pid":0,"tid":"6908","ts":"4394970"},
-		{"name":"","ph":"E","pid":0,"tid":"19580","ts":"4395015"},
-		{"name":"","ph":"E","pid":0,"tid":"19580","ts":"4395026"}
+		{"name":"homework3_slow_function","ph":"B","pid":0,"tid":"20756","ts":"1870899"},
+		{"name":"homework3_slow_function","ph":"B","pid":0,"tid":"17808","ts":"1882767"},
+		{"name":"homework3_slower_function","ph":"B","pid":0,"tid":"17808","ts":"2905392"},
+		{"name":"homework3_slower_function","ph":"B","pid":0,"tid":"20756","ts":"2905507"},
+		{"name":"","ph":"E","pid":0,"tid":"17808","ts":"5000176"},
+		{"name":"","ph":"E","pid":0,"tid":"17808","ts":"5000193"},
+		{"name":"","ph":"E","pid":0,"tid":"20756","ts":"5000264"},
+		{"name":"","ph":"E","pid":0,"tid":"20756","ts":"5000279"}
 	]
 }
