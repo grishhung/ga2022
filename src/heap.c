@@ -115,7 +115,7 @@ void* heap_alloc(heap_t* heap, size_t size, size_t alignment)
 		
 		// END OF STUDENT CODE
 	}
-
+	/*
 	// START OF STIDENT CODE
 
 	// Construct the callstack linked list for heap->arena.
@@ -173,7 +173,7 @@ void* heap_alloc(heap_t* heap, size_t size, size_t alignment)
 	}
 
 	// END OF STUDENT CODE
-
+	*/
 	mutex_unlock(heap->mutex);
 
 	return address;
