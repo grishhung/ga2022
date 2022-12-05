@@ -547,7 +547,7 @@ gpu_t* gpu_create(heap_t* heap, wm_window_t* window)
 	{
 		{
 			.type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
-			.descriptorCount = 512,
+			.descriptorCount = 4096,  // 512
 		}
 	};
 	VkDescriptorPoolCreateInfo descriptor_pool_info =
@@ -556,7 +556,7 @@ gpu_t* gpu_create(heap_t* heap, wm_window_t* window)
 		.flags = VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT,
 		.poolSizeCount = _countof(descriptor_pool_sizes),
 		.pPoolSizes = descriptor_pool_sizes,
-		.maxSets = 512,
+		.maxSets = 4096,  // 512
 	};
 	result = vkCreateDescriptorPool(gpu->logical_device, &descriptor_pool_info, NULL, &gpu->descriptor_pool);
 	if (result)

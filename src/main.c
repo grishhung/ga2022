@@ -6,7 +6,8 @@
 #include "timer.h"
 #include "wm.h"
 
-#include "frogger_game.h"  // STUDENT ADDED
+#include "custom_game.h"  // STUDENT ADDED
+#include "custom_game.h"  // STUDENT ADDED
 
 int main(int argc, const char* argv[])
 {
@@ -20,17 +21,17 @@ int main(int argc, const char* argv[])
 	wm_window_t* window = wm_create(heap);
 	render_t* render = render_create(heap, window);
 
-	frogger_game_t* game = frogger_game_create(heap, fs, window, render);
+	custom_game_t* game = custom_game_create(heap, fs, window, render);
 
 	while (!wm_pump(window))
 	{
-		frogger_game_update(game);
+		custom_game_update(game);
 	}
 
 	/* XXX: Shutdown render before the game. Render uses game resources. */
 	render_destroy(render);
 
-	frogger_game_destroy(game);
+	custom_game_destroy(game);
 
 	wm_destroy(window);
 	fs_destroy(fs);

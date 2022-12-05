@@ -1,0 +1,27 @@
+# player
+type 0 {
+  scale {
+    x = 1.0f
+    y = 1.0f
+    z = 1.0f
+  }
+  color {
+    r = 1.0f
+    g = 1.0f
+    b = 0.0f
+  }
+}
+
+# wall
+type 1 {
+  scale {
+    x = 1.0f
+    y = 1.0f
+    z = 1.0f
+  }
+  color {
+    r = 0.0f
+    g = 0.0f
+    b = 1.0f
+  }
+}
