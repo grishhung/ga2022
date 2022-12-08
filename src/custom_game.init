@@ -1,0 +1,8 @@
+index 0 {
+  type = 0;
+  position {
+    x = 0.0f;
+    y = 0.0f;
+    z = 8.0f;
+  }
+}

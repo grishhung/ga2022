@@ -6,8 +6,7 @@
 #include "timer.h"
 #include "wm.h"
 
-#include "custom_game.h"  // STUDENT ADDED
-#include "custom_game.h"  // STUDENT ADDED
+#include "custom_game.h"
 
 int main(int argc, const char* argv[])
 {
@@ -21,7 +20,9 @@ int main(int argc, const char* argv[])
 	wm_window_t* window = wm_create(heap);
 	render_t* render = render_create(heap, window);
 
-	custom_game_t* game = custom_game_create(heap, fs, window, render);
+	char game_name[64] = "custom_game";
+
+	custom_game_t* game = custom_game_create(heap, fs, window, render, game_name);
 
 	while (!wm_pump(window))
 	{
@@ -31,7 +32,7 @@ int main(int argc, const char* argv[])
 	/* XXX: Shutdown render before the game. Render uses game resources. */
 	render_destroy(render);
 
-	custom_game_destroy(game);
+	custom_game_destroy(game, game_name);
 
 	wm_destroy(window);
 	fs_destroy(fs);

@@ -239,8 +239,10 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <None Include="custom_game.level" />
-    <None Include="custom_game.types" />
+    <None Include="custom_game.init" />
+    <None Include="custom_game.lvl" />
+    <None Include="custom_game.sav" />
+    <None Include="custom_game.type" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
